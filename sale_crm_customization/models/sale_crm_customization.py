@@ -12,7 +12,7 @@ class SaleCrmCustom(models.TransientModel):
 
     def action_apply(self):
         res = super(SaleCrmCustom, self).action_apply()
-        self.lead_id.get_trust(trust_value=self.trust)
+        self.lead_id.trust=self.trust
         return res
 
 
@@ -30,10 +30,6 @@ class CrmLeadTrust(models.Model):
         res['context']['default_trust'] = self.trust
         return res
 
-    def get_trust(self, trust_value=False):
-        for rec in self:
-            if trust_value:
-                rec.trust = trust_value
 
 
 class TrustSales(models.Model):
