@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="add_trust_to_wizard" model="ir.ui.view">
+        <field name="name">crm.quotation.partner.trust</field>
+        <field name="model">crm.quotation.partner</field>
+        <field name="inherit_id" ref="sale_crm.crm_quotation_partner_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group" position="after">
+                <group attrs="{'invisible': [('action','=','nothing')]}">
+                    <field name="trust" widget="radio"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="add_trust_to_crm" model="ir.ui.view">
+        <field name="name">crm.lead.trust</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.crm_lead_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='opportunity_partner']/field[@name='partner_id']" position="after">
+                    <field name="trust" attrs="{'invisible': [('partner_id','=',False)]}"/>
+            </xpath>
+        </field>
+    </record>
+   <record id="trust_add_to_sale_form" model="ir.ui.view">
+        <field name="name">sale.order.trust</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='client_order_ref']" position="after">
+                <field name="trust" widget="radio"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
